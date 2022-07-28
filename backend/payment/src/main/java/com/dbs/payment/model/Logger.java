@@ -1,7 +1,6 @@
 package com.dbs.payment.model;
 
 
-import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
