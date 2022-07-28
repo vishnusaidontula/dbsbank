@@ -25,14 +25,14 @@ import lombok.ToString;
 public class Customer{
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(length = 14)
+	@Column(length = 11)
 	private int customerId;
 	private String accountHolderName;
 	private boolean overDraftFlag;
 	private Double clearBalance;
 	private String address;
 	private String city;
-	private char type;
+	private CustomerType type;
 	
 	
 	
