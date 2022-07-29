@@ -32,14 +32,15 @@ public class Logger {
 	private String action;
 	private String ipaddress;
 	@ManyToOne(fetch = FetchType.LAZY,
-			cascade = {CascadeType.PERSIST,CascadeType.DETACH,CascadeType.MERGE,CascadeType.REFRESH})
+			cascade = {CascadeType.DETACH,CascadeType.MERGE,CascadeType.REFRESH})
 	@JoinColumn(name="customer_id")
 	private Customer customer;
 	@ManyToOne(fetch = FetchType.LAZY,
-			cascade = {CascadeType.PERSIST,CascadeType.DETACH,CascadeType.MERGE,CascadeType.REFRESH})
+			cascade = {CascadeType.DETACH,CascadeType.MERGE,CascadeType.REFRESH})
 	@JoinColumn(name="employee_id")
 	private Employee employee;
-	@OneToOne(fetch = FetchType.LAZY)
+	@OneToOne(fetch = FetchType.LAZY,
+			cascade = {CascadeType.DETACH,CascadeType.MERGE,CascadeType.REFRESH})
 	@JoinColumn(name="transaction_id")
 	private Transaction transaction;
 }
