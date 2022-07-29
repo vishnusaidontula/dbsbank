@@ -1,56 +1,55 @@
 package com.dbs.payment.service;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.dbs.payment.dao.EmployeeRepository;
+import com.dbs.payment.dto.EmployeeDTO;
+import com.dbs.payment.exception.EmployeeNotFoundException;
 import com.dbs.payment.model.Employee;
 
+@Service
 public class EmployeeServiceImplementation implements EmployeeService {
+	@Autowired
+	private ModelMapper modelMapper;
 	@Autowired
 	private EmployeeRepository employeeRepository;
 	@Override
-	public List<Employee> getEmployees() {
-		// TODO Auto-generated method stub
-		List<Employee> employees = new ArrayList<Employee>();
-        this.employeeRepository.findAll().forEach(emp->employees.add(emp));
-        return employees;
+	public List<EmployeeDTO> getEmployees() {
+		return employeeRepository.findAll().stream()
+				.map(employee -> modelMapper.map(employee, EmployeeDTO.class))
+				.collect(Collectors.toList());
 	}
 
 	@Override
-	public Optional<Employee> getEmployeeById(int id) {
-		// TODO Auto-generated method stub
+	public EmployeeDTO getEmployeeById(int id) throws EmployeeNotFoundException {
 		Optional<Employee> employee = this.employeeRepository.findById(id);
-        System.out.println(employee);
-        return employee;
+        if(employee.isEmpty())
+        {
+        	throw new EmployeeNotFoundException("Invalid Employee Id "+id);
+        }
+        EmployeeDTO employeeDTO= modelMapper.map(employee.get(), EmployeeDTO.class);
+        return employeeDTO;
 	}
 
 	@Override
-	public String saveEmployee(Employee employee) {
-		if(this.employeeRepository.findById(employee.getEmployeeId()).isPresent()) {
-			return "Already Exists";
-		}
-		try {
-			this.employeeRepository.save(employee);
-		}catch (Exception e) {
-			System.out.println(e.getMessage());
-		}
-		return "Inserted";
+	public String saveEmployee(EmployeeDTO employeeDTO) {
+		Employee employee=modelMapper.map(employeeDTO,Employee.class);
+		employeeRepository.save(employee);
+		return "sucessfully saved employee details";
 	}
 
 	@Override
-	public String deleteEmployeeById(int id) {
-		// TODO Auto-generated method stub
-		try{
-			this.employeeRepository.deleteById(id);
-		}catch (Exception e) {
-			System.out.println("Error Deleting product in database");
-			throw new IllegalArgumentException("Could not delete");
-		}
-		return "Deleted";
+	public String deleteEmployeeById(int id) throws EmployeeNotFoundException {
+		EmployeeDTO employeeDTO=getEmployeeById(id);
+		Employee employee=modelMapper.map(employeeDTO, Employee.class);
+		employeeRepository.delete(employee);
+		return "sucessfully deleted employee with id - "+id;
 	}
 
 }

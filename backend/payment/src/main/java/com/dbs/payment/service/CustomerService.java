@@ -8,6 +8,6 @@ import com.dbs.payment.exception.CustomerNotFoundException;
 public interface CustomerService {
 	public List<CustomerDTO> getCustomers();
 	public CustomerDTO getCustomerById(int id) throws CustomerNotFoundException;
-	public String saveCustomer(CustomerDTO customer);
+	public String saveCustomer(CustomerDTO customerDTO);
 	public String deleteCustomerById(int id) throws CustomerNotFoundException;
 }
