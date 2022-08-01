@@ -1,5 +1,7 @@
 package com.dbs.payment.controller;
 
+import java.math.BigInteger;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +23,7 @@ public class EmployeeController {
 	private EmployeeService employeeService;
 	
 	@GetMapping("/employee/{id}")
-	public ResponseEntity<EmployeeDTO> getEmployeeById(@PathVariable int id) throws EmployeeNotFoundException
+	public ResponseEntity<EmployeeDTO> getEmployeeById(@PathVariable BigInteger id) throws EmployeeNotFoundException
 	{
 		return(ResponseEntity.ok().body(employeeService.getEmployeeById(id)));
 	}
@@ -34,7 +36,7 @@ public class EmployeeController {
 	}
 	
 	@DeleteMapping("/employee/{id}")
-	public String deleteEmployee(@PathVariable int id) throws EmployeeNotFoundException {
+	public String deleteEmployee(@PathVariable BigInteger id) throws EmployeeNotFoundException {
 		String response = employeeService.deleteEmployeeById(id);
 		return response;
 	}

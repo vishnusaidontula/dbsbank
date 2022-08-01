@@ -1,5 +1,8 @@
 package com.dbs.payment.controller;
 
+import java.math.BigInteger;
+import java.util.List;
+
 import javax.validation.Valid;
 
 
@@ -21,10 +24,12 @@ import com.dbs.payment.service.CustomerService;
 public class CustomerController {
 	@Autowired
 	private CustomerService customerService;
-
-	
+	@GetMapping("/customers")
+	public ResponseEntity<List<CustomerDTO>> getCustomers(){
+		return ResponseEntity.ok(customerService.getCustomers());
+	}
 	@GetMapping("/customer/{id}")
-	public  ResponseEntity<CustomerDTO> getCustomer(@PathVariable int id) throws CustomerNotFoundException {
+	public  ResponseEntity<CustomerDTO> getCustomer(@PathVariable BigInteger id) throws CustomerNotFoundException {
 		CustomerDTO customer = customerService.getCustomerById(id);
 		
 		return ResponseEntity.ok().body(customer);
@@ -37,7 +42,7 @@ public class CustomerController {
 	}
 	
 	@DeleteMapping("/customer/{id}")
-	public String deleteCustomer(@PathVariable int id) throws CustomerNotFoundException {
+	public String deleteCustomer(@PathVariable BigInteger id) throws CustomerNotFoundException {
 		String response = customerService.deleteCustomerById(id);
 		return response;
 	}

@@ -1,5 +1,7 @@
 package com.dbs.payment.controller;
 
+import java.util.List;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,14 +15,18 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.dbs.payment.dto.TransferTypeDTO;
 import com.dbs.payment.exception.TransferTypeNotFoundException;
-import com.dbs.payment.service.TransferService;
+import com.dbs.payment.service.TransferTypeService;
 
 @RestController
 public class TransferTypeController {
 	@Autowired
-	private TransferService transferService;
+	private TransferTypeService transferService;
+	@GetMapping("/transfertype")
+	public ResponseEntity<List<TransferTypeDTO>> getTransferType(){
+		return ResponseEntity.ok(transferService.getTransferType());
+	}
 	@GetMapping("/transferType/{code}")
-	public  ResponseEntity<TransferTypeDTO> getTransferType(@PathVariable String code) throws TransferTypeNotFoundException {
+	public  ResponseEntity<TransferTypeDTO> getTransferTypeByCode(@PathVariable String code) throws TransferTypeNotFoundException {
 		TransferTypeDTO transferTypeDto = transferService.getTransferTypeByCode(code);
 		
 		return ResponseEntity.ok(transferTypeDto);
