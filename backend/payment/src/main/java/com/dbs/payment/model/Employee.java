@@ -1,6 +1,8 @@
 package com.dbs.payment.model;
 
 
+import java.math.BigInteger;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -25,7 +27,7 @@ public class Employee {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(length = 11)
-	private int employeeId;
+	private BigInteger employeeId;
 	private String employeeName;
 	private String password;
 	
