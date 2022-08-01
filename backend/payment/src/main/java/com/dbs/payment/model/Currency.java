@@ -15,5 +15,6 @@ public class Currency {
 	@Column(length = 3)
 	private String currencyCode;
 	private String currencyName;
+	@Column(columnDefinition="Decimal(10,2)")
 	private double conversionRate;
 }
