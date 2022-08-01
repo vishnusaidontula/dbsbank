@@ -1,9 +1,8 @@
 package com.dbs.payment.model;
 
-import javax.persistence.Column;
+
+
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
@@ -22,7 +21,6 @@ import lombok.ToString;
 @ToString
 public class TransferType {
 	@Id
-	@Column(length = 1)
 	private String transferTypeCode;
 	private String description;
 }

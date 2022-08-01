@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.dbs.payment.dto.MessageDTO;
-import com.dbs.payment.exception.CustomerNotFoundException;
 import com.dbs.payment.exception.MessageNotFoundException;
 import com.dbs.payment.service.MessageService;
 
@@ -29,7 +28,7 @@ public class MessageController {
 		return ResponseEntity.ok().body(message);
 	}
 	@PostMapping("/message")
-	public String saveCustomer(@RequestBody @Valid MessageDTO messageDTO) {
+	public String saveMessage(@RequestBody @Valid MessageDTO messageDTO) {
 		
 		String responses = messageService.saveMessage(messageDTO);
 		return responses;

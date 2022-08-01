@@ -8,7 +8,7 @@ import com.dbs.payment.dto.TransferTypeDTO;
 import com.dbs.payment.exception.TransferTypeNotFoundException;
 
 
-public interface TransferService {
+public interface TransferTypeService {
 	public List<TransferTypeDTO> getTransferType();
 	public TransferTypeDTO getTransferTypeByCode(String code) throws TransferTypeNotFoundException;
 	public String saveTransferType(TransferTypeDTO transferType);

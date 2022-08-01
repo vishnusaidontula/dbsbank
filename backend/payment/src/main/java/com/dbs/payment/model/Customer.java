@@ -2,6 +2,8 @@ package com.dbs.payment.model;
 
 
 
+import java.math.BigInteger;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -25,11 +27,12 @@ import lombok.ToString;
 public class Customer{
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(length = 11)
-	private int customerId;
+	@Column(length = 14,columnDefinition = "BIGINT")
+	private BigInteger customerId;
 	private String accountHolderName;
 	private boolean overDraftFlag;
-	private Double clearBalance;
+	@Column(columnDefinition="Decimal(10,2)")
+	private double clearBalance;
 	private String address;
 	private String city;
 	private CustomerType type;

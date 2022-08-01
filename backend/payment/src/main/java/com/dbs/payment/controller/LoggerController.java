@@ -1,5 +1,6 @@
 package com.dbs.payment.controller;
 
+import java.math.BigInteger;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,13 +37,13 @@ public class LoggerController {
 		return ResponseEntity.ok(logger);
 	}
 	
-	@GetMapping("/customer/{id}/loggers")
-	public ResponseEntity<List<LoggerDTO>> getLoggersByCustomerId(@PathVariable int id) throws CustomerNotFoundException{
+	@GetMapping("/loggers/customer/{id}")
+	public ResponseEntity<List<LoggerDTO>> getLoggersByCustomerId(@PathVariable BigInteger id) throws CustomerNotFoundException{
 		CustomerDTO customerDTO = customerService.getCustomerById(id);
 		return ResponseEntity.ok(loggerService.getLoggersByCustomer(customerDTO));
 	}
-	@GetMapping("/employee/{id}/loggers")
-	public ResponseEntity<List<LoggerDTO>> getLoggersByEmployeeId(@PathVariable int id) throws  EmployeeNotFoundException{
+	@GetMapping("/loggers/employee/{id}")
+	public ResponseEntity<List<LoggerDTO>> getLoggersByEmployeeId(@PathVariable BigInteger id) throws  EmployeeNotFoundException{
 		EmployeeDTO  employeeDTO = employeeService.getEmployeeById(id);
 		return ResponseEntity.ok(loggerService.getLoggersByEmployee(employeeDTO));
 	}

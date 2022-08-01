@@ -16,7 +16,7 @@ import com.dbs.payment.exception.TransferTypeNotFoundException;
 
 import com.dbs.payment.model.TransferType;
 @Service
-public class TranferTypeServiceImplementation implements TransferService {
+public class TranferTypeServiceImplementation implements TransferTypeService {
 	@Autowired
 	private ModelMapper modelMapper;
 	@Autowired

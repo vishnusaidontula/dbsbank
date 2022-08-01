@@ -1,5 +1,6 @@
 package com.dbs.payment.service;
 
+import java.math.BigInteger;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -25,7 +26,7 @@ public class CustomerServiceImplementation implements CustomerService{
 		.collect(Collectors.toList());	
 	}
 	@Override
-	public CustomerDTO getCustomerById(int id) throws CustomerNotFoundException {
+	public CustomerDTO getCustomerById(BigInteger id) throws CustomerNotFoundException {
 		Optional<Customer> res = customerRepository.findById(id);
 		if(res.isEmpty())
 			throw new CustomerNotFoundException("Invalid customer id - "+id);
@@ -39,7 +40,7 @@ public class CustomerServiceImplementation implements CustomerService{
 		return "sucessfully saved customer details";
 	}
 	@Override
-	public String deleteCustomerById(int id) throws CustomerNotFoundException {
+	public String deleteCustomerById(BigInteger id) throws CustomerNotFoundException {
 		CustomerDTO customerDTO = getCustomerById(id);
 		Customer customer = modelMapper.map(customerDTO, Customer.class);
 		customerRepository.delete(customer);

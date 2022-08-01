@@ -23,7 +23,7 @@ public class CurrencyController {
 
 		
 	@GetMapping("/currency/{currencyCode}")
-	public  ResponseEntity<CurrencyDTO> getCustomer(@PathVariable String currencyCode) throws CurrencyNotFoundException {
+	public  ResponseEntity<CurrencyDTO> getCurrency(@PathVariable String currencyCode) throws CurrencyNotFoundException {
 		CurrencyDTO currency = currencyService.getCurrencyByCode(currencyCode);
 			
 		return ResponseEntity.ok().body(currency);
@@ -36,7 +36,7 @@ public class CurrencyController {
 	}
 		
 	@DeleteMapping("/currency/{currencyCode}")
-	public String deleteCurency(@PathVariable String currencyCode) throws CurrencyNotFoundException {
+	public String deleteCurrency(@PathVariable String currencyCode) throws CurrencyNotFoundException {
 		String response = currencyService.deleteCurrencyByCode(currencyCode);
 		return response;
 	}

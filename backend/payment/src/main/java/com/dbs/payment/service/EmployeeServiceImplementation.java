@@ -1,5 +1,6 @@
 package com.dbs.payment.service;
 
+import java.math.BigInteger;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -27,7 +28,7 @@ public class EmployeeServiceImplementation implements EmployeeService {
 	}
 
 	@Override
-	public EmployeeDTO getEmployeeById(int id) throws EmployeeNotFoundException {
+	public EmployeeDTO getEmployeeById(BigInteger id) throws EmployeeNotFoundException {
 		Optional<Employee> employee = this.employeeRepository.findById(id);
         if(employee.isEmpty())
         {
@@ -45,7 +46,7 @@ public class EmployeeServiceImplementation implements EmployeeService {
 	}
 
 	@Override
-	public String deleteEmployeeById(int id) throws EmployeeNotFoundException {
+	public String deleteEmployeeById(BigInteger id) throws EmployeeNotFoundException {
 		EmployeeDTO employeeDTO=getEmployeeById(id);
 		Employee employee=modelMapper.map(employeeDTO, Employee.class);
 		employeeRepository.delete(employee);

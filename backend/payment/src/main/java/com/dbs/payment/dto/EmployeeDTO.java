@@ -1,12 +1,14 @@
 package com.dbs.payment.dto;
 
+import java.math.BigInteger;
+
 import javax.validation.constraints.NotNull;
 
 import lombok.Data;
 
 @Data
 public class EmployeeDTO {
-	private int employeeId;
+	private BigInteger employeeId;
 	@NotNull(message = "Employee name is required")
 	private String employeeName;
 	@NotNull(message = "Password is Required")
