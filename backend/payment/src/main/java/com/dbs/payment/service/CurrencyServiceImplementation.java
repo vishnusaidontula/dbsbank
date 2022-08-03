@@ -29,7 +29,7 @@ public class CurrencyServiceImplementation implements CurrencyService {
 		Optional<Currency> res = currencyRepository.findById(currencyCode);
 		if(res.isEmpty())
 			throw new CurrencyNotFoundException("Invalid currency code - "+currencyCode);
-		CurrencyDTO currencyDTO = modelMapper.map(res.get(), CurrencyDTO.class);
+		CurrencyDTO currencyDTO = modelMapper.map(res.get(),CurrencyDTO.class);
 		return currencyDTO;
 	}
 	@Override

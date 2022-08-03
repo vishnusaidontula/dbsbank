@@ -3,7 +3,9 @@ package com.dbs.payment.controller;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -15,6 +17,7 @@ import com.dbs.payment.dto.BankDTO;
 import com.dbs.payment.exception.BankNotFoundException;
 import com.dbs.payment.service.BankService;
 
+@CrossOrigin("*")
 @RestController
 public class BankController {
 	@Autowired
@@ -28,15 +31,15 @@ public class BankController {
 		return ResponseEntity.ok().body(bank);
 	}
 	@PostMapping("/bank")
-	public String saveBank(@RequestBody @Valid BankDTO bankDTO) {
+	public ResponseEntity<String> saveBank(@RequestBody @Valid BankDTO bankDTO) {
 			
 		String responses = bankService.saveBank(bankDTO);
-		return responses;
+		return new ResponseEntity<String>(responses,HttpStatus.CREATED);
 	}
 		
 	@DeleteMapping("/bank/{bankId}")
-	public String deleteBank(@PathVariable String bankId) throws BankNotFoundException {
+	public ResponseEntity<String> deleteBank(@PathVariable String bankId) throws BankNotFoundException {
 		String response = bankService.deleteBankById(bankId);
-		return response;
+		return new ResponseEntity<>(response,HttpStatus.NO_CONTENT);
 	}
 }

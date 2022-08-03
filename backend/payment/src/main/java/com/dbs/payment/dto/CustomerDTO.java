@@ -2,7 +2,7 @@ package com.dbs.payment.dto;
 
 import java.math.BigInteger;
 
-import javax.validation.constraints.NotNull;
+import javax.validation.constraints.NotBlank;
 
 import com.dbs.payment.model.CustomerType;
 
@@ -10,14 +10,16 @@ import lombok.Data;
 @Data
 public class CustomerDTO {
 	private BigInteger customerId;
-	@NotNull(message = "Required account holder name")
+	@NotBlank(message = "Required account holder name")
 	private String accountHolderName;
+	@NotBlank(message = "Required customer address")
 	private boolean overDraftFlag;
+	@NotBlank(message = "Required customer address")
 	private Double clearBalance;
-	@NotNull(message = "Required customer address")
+	@NotBlank(message = "Required customer address")
 	private String address;
-	@NotNull(message = "Required customer city")
+	@NotBlank(message = "Required customer city")
 	private String city;
-	@NotNull(message = "Required customer type")
+	@NotBlank(message = "Required customer type")
 	private CustomerType type;
 }

@@ -2,12 +2,11 @@ package com.dbs.payment.exception.handler;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
-
+import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 import com.dbs.payment.exception.TransferTypeNotFoundException;
-@ControllerAdvice
+@RestControllerAdvice
 public class TransferTypeExceptionHandler {
 	@ExceptionHandler
 	public ResponseEntity<ErrorResponse> handleException(TransferTypeNotFoundException exc) {
@@ -20,16 +19,6 @@ public class TransferTypeExceptionHandler {
 		return new ResponseEntity<>(error, HttpStatus.NOT_FOUND);
 	}
 	
-	@ExceptionHandler
-	public ResponseEntity<ErrorResponse> handleException(Exception exc) {
-		
-		ErrorResponse error = new ErrorResponse(
-											HttpStatus.BAD_REQUEST.value(),
-											exc.getMessage(),
-											System.currentTimeMillis());
-		return new ResponseEntity<>(error, HttpStatus.BAD_REQUEST);
-
-	}
 
 
 }

@@ -5,7 +5,9 @@ import java.math.BigInteger;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -16,7 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.dbs.payment.dto.EmployeeDTO;
 import com.dbs.payment.exception.EmployeeNotFoundException;
 import com.dbs.payment.service.EmployeeService;
-
+@CrossOrigin("*")
 @RestController
 public class EmployeeController {
 	@Autowired
@@ -29,16 +31,16 @@ public class EmployeeController {
 	}
 	
 	@PostMapping("/employee")
-	public String saveEmployee(@RequestBody @Valid EmployeeDTO employeeDTO) {
+	public ResponseEntity<String> saveEmployee(@RequestBody @Valid EmployeeDTO employeeDTO) {
 		
 		String responses = employeeService.saveEmployee(employeeDTO);
-		return responses;
+		return new ResponseEntity<String>(responses,HttpStatus.CREATED);
 	}
 	
 	@DeleteMapping("/employee/{id}")
-	public String deleteEmployee(@PathVariable BigInteger id) throws EmployeeNotFoundException {
+	public ResponseEntity<String> deleteEmployee(@PathVariable BigInteger id) throws EmployeeNotFoundException {
 		String response = employeeService.deleteEmployeeById(id);
-		return response;
+		return new ResponseEntity<>(response,HttpStatus.NO_CONTENT);
 	}
 	
 }

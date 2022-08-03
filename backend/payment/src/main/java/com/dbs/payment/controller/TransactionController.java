@@ -3,10 +3,16 @@ package com.dbs.payment.controller;
 import java.math.BigInteger;
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.dbs.payment.dto.CustomerDTO;
@@ -16,7 +22,7 @@ import com.dbs.payment.exception.InsufficientBalanaceException;
 import com.dbs.payment.exception.TransactionNotFoundException;
 import com.dbs.payment.service.CustomerService;
 import com.dbs.payment.service.TransactionService;
-
+@CrossOrigin("*")
 @RestController
 public class TransactionController {
 	
@@ -34,9 +40,10 @@ public class TransactionController {
 		CustomerDTO customerDTO = customerService.getCustomerById(id);
 		return ResponseEntity.ok(transactionService.getCustomerTransactions(customerDTO));
 	}
-	
-	public ResponseEntity<String> saveTransaction(TransactionDTO transactionDTO) throws InsufficientBalanaceException{
+	@PostMapping("/transaction")
+	public ResponseEntity<String> saveTransaction(@RequestBody @Valid TransactionDTO transactionDTO) throws InsufficientBalanaceException, CustomerNotFoundException{
+		System.out.println(transactionDTO);
 		String response = transactionService.saveTransaction(transactionDTO);
-		return ResponseEntity.ok(response);
+		return new ResponseEntity<>(response,HttpStatus.CREATED);
 	}
 }
