@@ -3,7 +3,9 @@ package com.dbs.payment.controller;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -16,7 +18,7 @@ import com.dbs.payment.exception.MessageNotFoundException;
 import com.dbs.payment.service.MessageService;
 
 
-
+@CrossOrigin("*")
 @RestController
 public class MessageController {
 	@Autowired
@@ -28,14 +30,14 @@ public class MessageController {
 		return ResponseEntity.ok().body(message);
 	}
 	@PostMapping("/message")
-	public String saveMessage(@RequestBody @Valid MessageDTO messageDTO) {
+	public ResponseEntity<String> saveMessage(@RequestBody @Valid MessageDTO messageDTO) {
 		
 		String responses = messageService.saveMessage(messageDTO);
-		return responses;
+		return new ResponseEntity<String>(responses,HttpStatus.CREATED);
 	}
 	@DeleteMapping("/message/{code}")
-	public String deleteMessage(@PathVariable String code) throws MessageNotFoundException {
+	public ResponseEntity<String> deleteMessage(@PathVariable String code) throws MessageNotFoundException {
 		String response = messageService.deleteMessageByCode(code);
-		return response;
+		return new ResponseEntity<String>(response,HttpStatus.NO_CONTENT);
 	}
 }

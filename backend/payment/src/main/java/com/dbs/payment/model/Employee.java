@@ -26,7 +26,7 @@ import lombok.ToString;
 public class Employee {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(length = 11)
+	@Column(length = 11,columnDefinition = "BIGINT")
 	private BigInteger employeeId;
 	private String employeeName;
 	private String password;

@@ -1,5 +1,6 @@
 package com.dbs.payment.model;
 
+import java.math.BigInteger;
 import java.time.LocalDate;
 
 import javax.persistence.CascadeType;
@@ -45,8 +46,8 @@ public class Transaction {
 			cascade = {CascadeType.DETACH,CascadeType.MERGE,CascadeType.REFRESH})
 	@JoinColumn(name="receiver_bic")
 	private Bank receiverBIC;
-	@Column(length = 11)
-	private String receiverAccountHolderNumber;
+	@Column(length = 11,columnDefinition = "BIGINT")
+	private BigInteger receiverAccountHolderNumber;
 	private String receiverAccountHolderName;
 	@ManyToOne(fetch = FetchType.LAZY,
 			cascade = {CascadeType.DETACH,CascadeType.MERGE,CascadeType.REFRESH})

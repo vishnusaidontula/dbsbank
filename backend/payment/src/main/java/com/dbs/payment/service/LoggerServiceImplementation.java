@@ -10,11 +10,9 @@ import org.springframework.stereotype.Service;
 
 import com.dbs.payment.dao.LoggerRepository;
 import com.dbs.payment.dto.CustomerDTO;
-import com.dbs.payment.dto.EmployeeDTO;
 import com.dbs.payment.dto.LoggerDTO;
 import com.dbs.payment.exception.LoggerNotFoundException;
 import com.dbs.payment.model.Customer;
-import com.dbs.payment.model.Employee;
 import com.dbs.payment.model.Logger;
 
 @Service
@@ -43,19 +41,21 @@ public class LoggerServiceImplementation implements LoggerService{
 				.collect(Collectors.toList());
 	}
 
-	@Override
-	public List<LoggerDTO> getLoggersByEmployee(EmployeeDTO employeeDTO) {
-		Employee employee = modelMapper.map(employeeDTO, Employee.class); 
-		return loggerRepository.findByEmployee(employee).stream()
-				.map(logger->modelMapper.map(logger, LoggerDTO.class))
-				.collect(Collectors.toList());
-	}
+	
 
 	@Override
 	public String saveLogger(LoggerDTO loggerDTO) {
 		Logger logger = modelMapper.map(loggerDTO, Logger.class);
 		loggerRepository.save(logger);
 		return "successfully added";
+	}
+
+	@Override
+	public List<LoggerDTO> getLoggers() {
+		// TODO Auto-generated method stub
+		return loggerRepository.findAll().stream()
+				.map(logger->modelMapper.map(logger, LoggerDTO.class))
+				.collect(Collectors.toList());
 	}
 
 	
