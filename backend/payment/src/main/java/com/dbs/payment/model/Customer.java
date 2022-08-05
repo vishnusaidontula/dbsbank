@@ -26,7 +26,6 @@ import lombok.ToString;
 @AllArgsConstructor
 public class Customer{
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(length = 14,columnDefinition = "BIGINT")
 	private BigInteger customerId;
 	private String accountHolderName;
