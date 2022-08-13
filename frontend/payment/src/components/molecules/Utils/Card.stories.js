@@ -19,32 +19,26 @@ export const Card1= Template.bind({});
 Card1.args={
     details:[
         {
-            id:1,
             title:"View Loggers",
             imgv:imgv1
         },
         {
-            id:2,
             title:"Make Transaction",
             imgv:imgv2
         },
         {
-            id:3,
             title:"Add Customer",
             imgv:imgv3
         },
         {
-            id:4,
             title:"Contact Us",
             imgv:imgv4
         },
         {
-            id:5,
             title:"About",
             imgv:imgv5
         },
         {
-            id:6,
             title:"Settings",
             imgv:imgv6
         }
