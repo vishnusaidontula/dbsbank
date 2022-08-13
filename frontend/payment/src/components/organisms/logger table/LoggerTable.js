@@ -17,9 +17,9 @@ const LoggerTable = () => {
       <thead>
         <tr className="header">
           <th>Logger ID</th>
-          <th>Customer ID</th>
-          <th>Customer Name</th>
+          <th>Customer</th>
           <th>Transaction ID</th>
+          <th>Transfer Date</th>
           <th>Amount</th>
         </tr>
       </thead>
@@ -28,12 +28,21 @@ const LoggerTable = () => {
           return (
             <tr>
               <td>{value.loggerId}</td>
-              <td>{value.customer.customerId}</td>
-              <td>{value.customer.accountHolderName}</td>
+              <td>
+                  <div>
+                    {value.customer.accountHolderName}
+                  </div>
+                  <div>
+                      <p className="text-muted">#{value.customer.customerId}</p>
+                  </div>
+              </td>
               <td>
                 <Link to={`/transaction/${value.transaction.transactionId}`}>
                   {value.transaction.transactionId}
                 </Link>
+              </td>
+              <td>
+                  {value.transaction.transferDate}
               </td>
               <td>Rs {value.transaction.inrAmount}</td>
             </tr>
