@@ -1,9 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import getList from "../../../services/getList";
+import Pagination from "../../molecules/pagination/Pagination";
 import "./LoggerTable.css";
 const LoggerTable = () => {
   const [logDetails, setLogDetails] = useState([]);
+  const[currentPage,setCurrentPage] = useState(1);
+  const postPerPage = 15;
   const getLoggerData = () => {
     getList("/loggers")
       .then((res) => setLogDetails(res))
@@ -12,7 +15,15 @@ const LoggerTable = () => {
   useEffect(() => {
     getLoggerData();
   }, []);
+
+  const indexOfLastEntry = currentPage*postPerPage;
+  const indexOfFirstEntry =indexOfLastEntry-postPerPage;
+  const currentLoggerDetails = logDetails.slice(indexOfFirstEntry,indexOfLastEntry);
+  const getCurrentPage = (value)=>{
+    setCurrentPage(value);
+  } 
   return (
+    <>
     <table className="table table-bordered border-dark table-hover">
       <thead>
         <tr className="header">
@@ -24,9 +35,9 @@ const LoggerTable = () => {
         </tr>
       </thead>
       <tbody>
-        {logDetails.map((value) => {
+        {currentLoggerDetails.map((value,index) => {
           return (
-            <tr>
+            <tr key={index}>
               <td>{value.loggerId}</td>
               <td>
                   <div>
@@ -50,6 +61,8 @@ const LoggerTable = () => {
         })}
       </tbody>
     </table>
+    <Pagination totalPages={logDetails.length} postPerPage={postPerPage} getPageNumber={getCurrentPage}/>
+    </>
   );
 };
 
