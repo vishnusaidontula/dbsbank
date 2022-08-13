@@ -8,7 +8,7 @@ export default{
 const Template= args => <DropDown {...args} />
 export const DropDown1 = Template.bind({});
 DropDown1.args = {
-   url:"http://localhost:8087/currency",
+   url:"currency",
    getById:"currencyCode",
    getValue:(value)=>console.log(value)
 }
