@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import "./Card.css"
 
 
@@ -7,6 +8,7 @@ const Card=(props)=>{
         <div className="box">
             {
             props.details.map(value=>(
+            <Link to={`/${value.id}`}>
             <div className="col" key={value.id}>
                 <div className="card h-100">
                     <img src={value.imgv} className="card-img-top" alt="..."/>
@@ -15,6 +17,7 @@ const Card=(props)=>{
                     </div>
                 </div>
             </div>
+            </Link>
             ))
            }
         </div>

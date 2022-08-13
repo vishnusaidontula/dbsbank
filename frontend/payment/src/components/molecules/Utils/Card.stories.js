@@ -6,12 +6,15 @@ import imgv3 from "../../../asset/images/customer.png"
 import imgv4 from "../../../asset/images/contact.png"
 import imgv5 from "../../../asset/images/about.png"
 import imgv6 from "../../../asset/images/settings.png"
+import {MemoryRouter} from 'react-router-dom';
+
+
 export default{
     title: 'Molecules/Cards',
     component: Card
 }
 
-const Template= args => <Card {...args} />
+const Template= args =><MemoryRouter><Card {...args} /></MemoryRouter>
 export const Card1= Template.bind({});
 Card1.args={
     details:[
