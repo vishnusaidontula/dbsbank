@@ -1,0 +1,19 @@
+.g-4{
+    margin: auto;
+    /* width:40%; */
+}
+.h-100{
+    text-align: center;
+}
+.card-img-top{
+    width: 60%;
+    margin: auto;
+    padding: 1rem;
+}
+.col{
+    width: 20%;
+}
+.col:hover{
+    transition: 0.5s;
+    transform: scale(1.1);
+}
