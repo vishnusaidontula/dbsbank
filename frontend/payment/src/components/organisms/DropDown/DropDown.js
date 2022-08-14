@@ -2,7 +2,6 @@ import React,{useState,useEffect} from 'react'
 import Select from 'react-select'
 import getList from '../../../services/getList';
 const DropDown = (props) => {
-    const [value,setValue] = useState("");
     const [filterValues,setFilterValues] = useState([]);
     useEffect(() => {
          async function getData(){
@@ -19,7 +18,6 @@ const DropDown = (props) => {
         getData()
     },[props.url])
     const handleChange = ({value})=>{
-        setValue(value);
         props.getValue(value);
     }
     const getOptions = ()=>{
