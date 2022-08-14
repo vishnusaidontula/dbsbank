@@ -18,8 +18,8 @@ const DropDown = (props) => {
         }
         getData()
     },[props.url])
-    const handleChange = (event)=>{
-        setValue(event.value);
+    const handleChange = ({value})=>{
+        setValue(value);
         props.getValue(value);
     }
     const getOptions = ()=>{
