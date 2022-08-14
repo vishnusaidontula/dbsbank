@@ -20,27 +20,33 @@ Card1.args={
     details:[
         {
             title:"View Loggers",
-            imgv:imgv1
+            imgv:imgv1,
+            path:"/loggers"
         },
         {
             title:"Make Transaction",
-            imgv:imgv2
+            imgv:imgv2,
+            path:"/transaction"
         },
         {
             title:"Add Customer",
-            imgv:imgv3
+            imgv:imgv3,
+            path:"/customer"
         },
         {
             title:"Contact Us",
-            imgv:imgv4
+            imgv:imgv4,
+            path:"/contact-us"
         },
         {
             title:"About",
-            imgv:imgv5
+            imgv:imgv5,
+            path:"/about"
         },
         {
             title:"Settings",
-            imgv:imgv6
+            imgv:imgv6,
+            path:'/settings'
         }
     ]
 }
