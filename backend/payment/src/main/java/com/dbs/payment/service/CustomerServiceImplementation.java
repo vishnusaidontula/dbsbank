@@ -30,8 +30,7 @@ public class CustomerServiceImplementation implements CustomerService{
 		Optional<Customer> res = customerRepository.findById(id);
 		if(res.isEmpty())
 			throw new CustomerNotFoundException("Invalid customer id - "+id);
-		CustomerDTO customerDTO = modelMapper.map(res.get(), CustomerDTO.class);
-		return customerDTO;
+		return modelMapper.map(res.get(), CustomerDTO.class);
 	}
 	@Override
 	public String saveCustomer(CustomerDTO customerDTO) {

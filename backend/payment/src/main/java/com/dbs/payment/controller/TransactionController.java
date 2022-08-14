@@ -32,7 +32,7 @@ public class TransactionController {
 	private CustomerService customerService;
 	
 	@GetMapping("transaction/{id}")
-	public ResponseEntity<TransactionDTO> getTransactionById(int id) throws TransactionNotFoundException{
+	public ResponseEntity<TransactionDTO> getTransactionById(@PathVariable int id) throws TransactionNotFoundException{
 		return ResponseEntity.ok(transactionService.getTransactionById(id));
 	}
 	@GetMapping("/transaction/customer/{id}")
@@ -42,7 +42,6 @@ public class TransactionController {
 	}
 	@PostMapping("/transaction")
 	public ResponseEntity<String> saveTransaction(@RequestBody @Valid TransactionDTO transactionDTO) throws InsufficientBalanaceException, CustomerNotFoundException{
-		System.out.println(transactionDTO);
 		String response = transactionService.saveTransaction(transactionDTO);
 		return new ResponseEntity<>(response,HttpStatus.CREATED);
 	}
