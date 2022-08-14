@@ -1,7 +1,7 @@
 import React from 'react';
 import Pagination from './Pagination';
 export default{
-    title:"Molecule/Pagination",
+    title:"Molecules/Pagination",
     component:Pagination
 }
 const Template = args=><Pagination {...args}/>
