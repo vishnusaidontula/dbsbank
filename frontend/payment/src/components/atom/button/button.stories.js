@@ -20,6 +20,7 @@ Button2.args = {
     text:"Submit",
     size:"lg",
     type:"submit",
-    outline:"success"
+    outline:"success",
+    isDisabled:true
 
 }

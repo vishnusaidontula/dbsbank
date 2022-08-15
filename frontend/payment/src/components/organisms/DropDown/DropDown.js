@@ -7,7 +7,7 @@ const DropDown = (props) => {
          async function getData(){
             await getList(props.url).then(
                 (res)=>{
-                    console.log(`inside get list api of value ${props.url}`+res);
+                    console.log(`inside get list api of value ${props.url}`);
                     setFilterValues(res);
                 }
             )
@@ -31,7 +31,7 @@ const DropDown = (props) => {
     }
     return (
         <div>
-            <Select options={getOptions()} onChange={handleChange} />
+            <Select options={getOptions()} onChange={handleChange} placeholder={<div>{props.placeholder}</div>}/>
         </div>
     )
 }

@@ -9,8 +9,8 @@ export default{
 const Template = args=><Input {...args}/>
 export const input = Template.bind({});
 input.args={
-    label:"Username",
     type:"text",
     placeholder:"Enter input",
-    handleKeyUp:(event)=>console.log(event.target.value)
+    handleKeyUp:(value)=>console.log(value),
+    isRequired:true
 }

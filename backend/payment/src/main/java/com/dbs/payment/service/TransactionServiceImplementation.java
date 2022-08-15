@@ -50,8 +50,7 @@ public class TransactionServiceImplementation implements TransactionService{
 	}
 
 	@Override
-	public String saveTransaction(TransactionDTO transactionDTO) throws InsufficientBalanaceException, CustomerNotFoundException {
-		// TODO Auto-generated method stub
+	public TransactionDTO saveTransaction(TransactionDTO transactionDTO) throws InsufficientBalanaceException, CustomerNotFoundException {
 		Transaction transaction = modelMapper.map(transactionDTO, Transaction.class);
 		CustomerDTO senderCustomer = customerService.getCustomerById(transactionDTO.getCustomer().getCustomerId());
 		double updateSenderCustomerBalance = senderCustomer.getClearBalance()-transactionDTO.getInrAmount();
@@ -70,7 +69,7 @@ public class TransactionServiceImplementation implements TransactionService{
 		logger.setAction("transaction");
 		transactionRepository.save(transaction);
 		loggerRepository.save(logger);
-		return "Successfully save transaction details";
+		return modelMapper.map(transaction,TransactionDTO.class);
 	}
 
 }

@@ -6,6 +6,7 @@ const ViewTransaction = () => {
   const [transactionDetails, setTransactionDetails] = useState({});
   const params = useParams();
   const [loading, setLoading] = useState(true);
+  const [amount,setAmount]=useState();
   useEffect(() => {
     async function getData() {
       await getList(`/transaction/${params.id}`)
@@ -13,6 +14,7 @@ const ViewTransaction = () => {
           console.log(`inside get list api of value /transaction/id` + res);
           setTransactionDetails(res);
           setLoading(false);
+          setAmount( parseFloat(res.currency.conversionRate)*parseFloat(res.currencyAmount))
         })
         .catch((err) => {
           console.log(err);
@@ -38,7 +40,7 @@ const ViewTransaction = () => {
           <div className="row">
             <div className="col-lg-8">
               <div className="card">
-                <div className="card-body">
+                <div className="card-body mb-0 pb-0">
                   <div className="mb-3 d-flex justify-content-between">
                     <div>
                       <span className="me-3">
@@ -55,8 +57,18 @@ const ViewTransaction = () => {
                       <span className="text">Invoice</span>
                     </div>
                   </div>
-                  <table className="table table-borderless">
+                  <table className="table table-borderless mb-0 pb-0">
                     <tbody>
+                      <tr>
+                        <td>
+                          <h6 className="small mb-0">
+                            <span className="text-reset">Message</span>
+                          </h6>
+                        </td>
+                        <td className="text-end">
+                          {transactionDetails.message.instruction}
+                        </td>
+                      </tr>
                       <tr>
                         <td>
                           <h6 className="small mb-0">
@@ -85,6 +97,17 @@ const ViewTransaction = () => {
                       <tr>
                         <td>
                           <h6 className="small mb-0">
+                            <span className="text-reset">Amount</span>
+                          </h6>
+                        </td>
+                        <td className="text-end">
+                          ₹ {amount}
+                        </td>
+                      </tr>
+                      
+                      <tr>
+                        <td>
+                          <h6 className="small mb-0">
                             <span className="text-reset">Transfer Fee</span>
                           </h6>
                         </td>
@@ -92,20 +115,11 @@ const ViewTransaction = () => {
                           ₹ {transactionDetails.transferFee}
                         </td>
                       </tr>
-                      <tr>
-                        <td>
-                          <h6 className="small mb-0">
-                            <span className="text-reset">Message</span>
-                          </h6>
-                        </td>
-                        <td className="text-end">
-                          {transactionDetails.message.instruction}
-                        </td>
-                      </tr>
+
                       <tr className="fw-bold">
                         <td>
                           <span className="text-reset">
-                            Total Transaction amount{" "}
+                            Total Transaction amount
                           </span>
                         </td>
                         <td className="text-end">

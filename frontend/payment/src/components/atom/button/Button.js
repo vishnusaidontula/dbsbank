@@ -5,7 +5,7 @@ const Button = (props) => {
         <div>
             <button type={props.type} 
             className={`btn btn-outline-${props.outline} btn-${props.size}`}
-            onClick={props.handleClick}>
+            onClick={props.handleClick} disabled={props.isDisabled}>
                 {props.text}
             </button>
         </div>

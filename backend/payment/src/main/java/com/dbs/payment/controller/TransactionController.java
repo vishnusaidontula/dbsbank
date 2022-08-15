@@ -41,8 +41,8 @@ public class TransactionController {
 		return ResponseEntity.ok(transactionService.getCustomerTransactions(customerDTO));
 	}
 	@PostMapping("/transaction")
-	public ResponseEntity<String> saveTransaction(@RequestBody @Valid TransactionDTO transactionDTO) throws InsufficientBalanaceException, CustomerNotFoundException{
-		String response = transactionService.saveTransaction(transactionDTO);
+	public ResponseEntity<TransactionDTO> saveTransaction(@RequestBody @Valid TransactionDTO transactionDTO) throws InsufficientBalanaceException, CustomerNotFoundException{
+		TransactionDTO response = transactionService.saveTransaction(transactionDTO);
 		return new ResponseEntity<>(response,HttpStatus.CREATED);
 	}
 }

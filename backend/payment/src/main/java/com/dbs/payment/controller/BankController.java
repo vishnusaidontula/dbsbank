@@ -1,5 +1,7 @@
 package com.dbs.payment.controller;
 
+import java.util.List;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,10 +24,16 @@ import com.dbs.payment.service.BankService;
 public class BankController {
 	@Autowired
 	private BankService bankService;
-
+	
+	@GetMapping("/banks")
+	public  ResponseEntity<List<BankDTO>> getBank() {
+		List<BankDTO> banks = bankService.getBank();
+			
+		return ResponseEntity.ok().body(banks);
+	}
 		
 	@GetMapping("/bank/{bankId}")
-	public  ResponseEntity<BankDTO> getBank(@PathVariable String bankId) throws BankNotFoundException {
+	public  ResponseEntity<BankDTO> getBankById(@PathVariable String bankId) throws BankNotFoundException {
 		BankDTO bank = bankService.getBankById(bankId);
 			
 		return ResponseEntity.ok().body(bank);
