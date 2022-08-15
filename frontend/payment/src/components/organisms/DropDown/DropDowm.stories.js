@@ -10,5 +10,6 @@ export const DropDown1 = Template.bind({});
 DropDown1.args = {
    url:"currency",
    getById:"currencyCode",
-   getValue:(value)=>console.log(value)
+   getValue:(value)=>console.log(value),
+   placeholder:"Select Currency"
 }

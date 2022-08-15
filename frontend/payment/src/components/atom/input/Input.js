@@ -1,16 +1,22 @@
-import React from 'react'
-import './Input.css';
+import React from "react";
+import "./Input.css";
 const Input = (props) => {
-    return (
-        <div className={`input-group input-group-lg row`}>
-            <label for="input" className="col-form-label col-sm-2">{props.label}</label> 
-            <input type={props.type} 
-            id="input"
-            className="form-control col-sm-10"
-            onKeyUp={props.handleKeyUp}
-             placeholder={props.placeholder} />
-        </div>
-    )
-}
+    const handleChange = (event)=>{
+        props.handleKeyUp(event.target.value)
+    }
+  return (
+    <div className={`input-group form-group row  align-items-center`}>
+      <input
+        type={props.type}
+        id="input"
+        className="form-control col-auto"
+        onChange={handleChange}
+        placeholder={props.placeholder}
+        required = {props.isRequired}
+        step={props.step}
+      />
+    </div>
+  );
+};
 
-export default Input
+export default Input;

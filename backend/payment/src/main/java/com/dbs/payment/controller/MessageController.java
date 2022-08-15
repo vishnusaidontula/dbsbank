@@ -1,5 +1,7 @@
 package com.dbs.payment.controller;
 
+import java.util.List;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,8 +25,12 @@ import com.dbs.payment.service.MessageService;
 public class MessageController {
 	@Autowired
 	private MessageService messageService;
+	@GetMapping("/message")
+	public ResponseEntity<List<MessageDTO>> getMessage(){
+		return ResponseEntity.ok().body(messageService.getMessageCode());
+	}
 	@GetMapping("/message/{code}")
-	public  ResponseEntity<MessageDTO> getMessage(@PathVariable String code) throws MessageNotFoundException {
+	public  ResponseEntity<MessageDTO> getMessageByCode(@PathVariable String code) throws MessageNotFoundException {
 		MessageDTO message = messageService.getMessageByCode(code);
 		
 		return ResponseEntity.ok().body(message);

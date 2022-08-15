@@ -12,5 +12,5 @@ import com.dbs.payment.exception.TransactionNotFoundException;
 public interface TransactionService {
 	public TransactionDTO getTransactionById(int id) throws TransactionNotFoundException;
 	public List<TransactionDTO> getCustomerTransactions(CustomerDTO customerDTO);
-	public String saveTransaction(TransactionDTO transactionDTO) throws InsufficientBalanaceException, CustomerNotFoundException;
+	public TransactionDTO saveTransaction(TransactionDTO transactionDTO) throws InsufficientBalanaceException, CustomerNotFoundException;
 }
