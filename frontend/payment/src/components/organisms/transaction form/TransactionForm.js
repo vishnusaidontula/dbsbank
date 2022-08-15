@@ -6,6 +6,11 @@ import Input from "../../atom/input/Input";
 import DropDown from "../DropDown/DropDown";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import "./TransactionFrom.css";
+import API from "../../../services/API";
+import { useNavigate } from "react-router-dom";
+//import Modal from "../../atom/alert/Modal";
+
 const TransactionForm = () => {
   const [customerId, setCustomerId] = useState();
   const [customer, setCustomer] = useState(null);
@@ -21,7 +26,16 @@ const TransactionForm = () => {
   const [inrAmount, setInrAmount] = useState();
   const [transferFee, setTransferFee] = useState();
   const [message, setMessage] = useState();
-  const[transferDate,setTransferDate] = useState(new Date());
+  const [transferDate, setTransferDate] = useState(new Date());
+  const [error, setError] = useState(false);
+  const [buttonDisbale, setButtonDisable] = useState(false);
+  const navigate = useNavigate();
+  useEffect(()=>{
+    function disableSubmit()
+    {
+      console.log(transferDate);
+    }
+  },[transferDate])
   useEffect(() => {
     async function getCustomer() {
       await getList(`/customer/${customerId}`)
@@ -40,6 +54,8 @@ const TransactionForm = () => {
             });
         })
         .catch((err) => {
+          setCustomer(null);
+          setTransferType(null);
           console.log(err);
         });
     }
@@ -78,24 +94,76 @@ const TransactionForm = () => {
     }
     currency && currencyAmount && getAmount();
   }, [currencyAmount, currency]);
-  function handleSubmit(){
-    const transaction = {
-      customer: customer,
-      currency: currency,
-      senderBIC: senderBIC,
-      receiverBIC: receiverBIC,
-      receiverAccountHolderNumber: receiverAccountHolderNumber,
-      receiverAccountHolderName: receiverAccountHolderName,
-      transferType: transferType,
-      message: message,
-      currencyAmount: currencyAmount,
-      transferFee: transferFee,
-      inrAmount: inrAmount,
-      transferDate:transferDate
-    };
-    postElement('/transaction',transaction).then(
-      res=>console.log(res)
-    ).catch(err=>console.log(err))
+
+  function validateData() {
+    if (
+      customerId &&
+      senderBIC &&
+      receiverAccountHolderNumber &&
+      receiverAccountHolderName &&
+      currency &&
+      currencyAmount
+    ) {
+      setError(false);
+      return true;
+    }
+    setError(true);
+    return false;
+  }
+  function validateDate(date)
+  {
+    if(date.getDay()===6 || date.getDay()===0)
+    {
+      alert("Transaction cannot be made on Weekends");
+      setTransferDate(new Date());
+    }
+    else
+    setTransferDate(date);
+  }
+  function validateUserName() {
+    if (isReceiverBlocked) {
+      alert("Receiver User Name Blocked");
+      setButtonDisable(true);
+      return false;
+    }
+    setButtonDisable(false);
+    return true;
+  }
+
+  function handleSubmit() {
+    if (validateData() && validateUserName()) {
+      const transaction = {
+        customer: customer,
+        currency: currency,
+        senderBIC: senderBIC,
+        receiverBIC: receiverBIC,
+        receiverAccountHolderNumber: receiverAccountHolderNumber,
+        receiverAccountHolderName: receiverAccountHolderName,
+        transferType: transferType,
+        message: message,
+        currencyAmount: currencyAmount,
+        transferFee: transferFee,
+        inrAmount: inrAmount,
+        transferDate: transferDate,
+      };
+
+      postElement("/transaction", transaction)
+        .then((res) => {
+          console.log(res);
+          alert("Transaction Successful");
+          navigate(`/transaction/${res.transactionId}`);
+          // console.log(res.transactionId);
+          // navigate(`/successful/${res.transactionId}`);
+        })
+        .catch((err) =>{
+          const message=err.response.data.message;
+          if(message.includes("InsufficientBalanace"))
+          {
+            alert("Insufficient Bank Balance");
+          }
+          else alert(message);
+        });
+    }
   }
   return (
     <div className="container-fluid">
@@ -133,6 +201,11 @@ const TransactionForm = () => {
                         <div className="invalid-feedback">
                           <span>Please choose a valid customer id.</span>
                         </div>
+                        {!customerId && error && (
+                          <p className="error">
+                            Please choose a valid customer id.
+                          </p>
+                        )}
                       </td>
                     </tr>
                     <tr>
@@ -166,6 +239,9 @@ const TransactionForm = () => {
                           getValue={(value) => setSenderBIC(value)}
                           placeholder="Select BIC Code"
                         />
+                        {!senderBIC && error && (
+                          <p className="error">Please select your BIC</p>
+                        )}
                       </td>
                     </tr>
                     <tr>
@@ -209,6 +285,11 @@ const TransactionForm = () => {
                         <div className="invalid-feedback">
                           <span>Please enter a receiver account number.</span>
                         </div>
+                        {!receiverAccountHolderNumber && error && (
+                          <p className="error">
+                            Please enter a receiver account number.
+                          </p>
+                        )}
                       </td>
                     </tr>
                     <tr>
@@ -229,6 +310,11 @@ const TransactionForm = () => {
                         <div className="invalid-feedback">
                           <span>Please enter a receiver account number.</span>
                         </div>
+                        {!receiverAccountHolderName && error && (
+                          <p className="error">
+                            Please enter a receiver account number.
+                          </p>
+                        )}
                       </td>
                     </tr>
                     <tr>
@@ -243,7 +329,11 @@ const TransactionForm = () => {
                           getById="bic"
                           getValue={(value) => setReceiverBIC(value)}
                           placeholder="Select BIC Code"
+                          isRequired={true}
                         />
+                        {!receiverBIC && error && (
+                          <p className="error">Please select receiver BIC.</p>
+                        )}
                       </td>
                     </tr>
                     <tr>
@@ -289,10 +379,11 @@ const TransactionForm = () => {
                       </td>
                       <td>
                         <DatePicker
-                       minDate={new Date()}
-                        selected={transferDate}
-                        onChange={date => setTransferDate(date)}
-                        dateFormat="yyyy/MM/dd"
+                          minDate={new Date()}
+                          selected={transferDate}
+                          onChange={validateDate}
+                          dateFormat="yyyy/MM/dd"
+                          
                         />
                       </td>
                     </tr>
@@ -341,6 +432,9 @@ const TransactionForm = () => {
                           getValue={(value) => setCurrency(value)}
                           placeholder="Select Currency"
                         />
+                        {!currency && error && (
+                          <p className="error">please select the currency.</p>
+                        )}
                       </td>
                     </tr>
                     <tr>
@@ -355,11 +449,14 @@ const TransactionForm = () => {
                           placeholder="Enter Amount"
                           step={0.01}
                           handleKeyUp={(value) => setCurrencyAmount(value)}
-                          isRequired={true}
+                          minValue={"0.1"}
                         />
                         <div className="invalid-feedback">
                           <span>Please enter the amount.</span>
                         </div>
+                        {!receiverBIC && error && (
+                          <p className="error">Please enter valid amount.</p>
+                        )}
                       </td>
                     </tr>
                     <tr>
@@ -415,7 +512,14 @@ const TransactionForm = () => {
           </div>
         </div>
         <div className="col-12 justify-content-center align-items-center mx-auto d-flex ">
-          <Button type="button" size="lg" text="Submit form" outline="danger" handleClick={handleSubmit} />
+          <Button
+            type="button"
+            size="lg"
+            text="Submit form"
+            outline="danger"
+            isDisabled={buttonDisbale && isReceiverBlocked}
+            handleClick={handleSubmit}
+          />
         </div>
       </form>
     </div>

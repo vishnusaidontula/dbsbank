@@ -14,6 +14,7 @@ const Input = (props) => {
         placeholder={props.placeholder}
         required = {props.isRequired}
         step={props.step}
+        min={props.minValue?props.minValue:0}
       />
     </div>
   );
