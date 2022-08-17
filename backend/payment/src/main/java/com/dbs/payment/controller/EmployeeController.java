@@ -29,12 +29,16 @@ public class EmployeeController {
 	{
 		return(ResponseEntity.ok().body(employeeService.getEmployeeById(id)));
 	}
-	
+	@PostMapping("/checkemployee")
+	public ResponseEntity<EmployeeDTO> getEmployeeByNameAndPassword(@RequestBody EmployeeDTO employee) throws EmployeeNotFoundException
+	{
+		return(ResponseEntity.ok().body(employeeService.getEmployeeByNameAndPassword(employee.getEmployeeName(),employee.getPassword())));
+	}
 	@PostMapping("/employee")
 	public ResponseEntity<String> saveEmployee(@RequestBody @Valid EmployeeDTO employeeDTO) {
 		
 		String responses = employeeService.saveEmployee(employeeDTO);
-		return new ResponseEntity<String>(responses,HttpStatus.CREATED);
+		return new ResponseEntity<>(responses,HttpStatus.CREATED);
 	}
 	
 	@DeleteMapping("/employee/{id}")

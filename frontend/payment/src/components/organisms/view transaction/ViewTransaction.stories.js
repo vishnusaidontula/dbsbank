@@ -5,7 +5,7 @@ export default{
     title:"Organisms/View Transaction",
     component:ViewTransaction,
     decorators: [(Story) => (
-        <MemoryRouter initialEntries={["/transaction/13"]}>
+        <MemoryRouter initialEntries={["/transaction/1"]}>
            <Routes>
              <Route path="/transaction/:id" element={<Story />}/>
            </Routes>

@@ -8,7 +8,6 @@ const Input = (props) => {
     <div className={`input-group form-group row  align-items-center`}>
       <input
         type={props.type}
-        id="input"
         className="form-control col-auto"
         onChange={handleChange}
         placeholder={props.placeholder}

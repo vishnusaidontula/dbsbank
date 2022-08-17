@@ -5,7 +5,7 @@ const Header = () => {
   return (
     <nav className="navbar navbar-expand-lg navbar-dark bg-danger">
       <div className="container-fluid">
-        <Link to="/" className="navbar-brand ms-2">
+        <Link to="/home" className="navbar-brand ms-2">
           <img src={logo} height="60" alt="logo" />
         </Link>
         <ul className="navbar-nav ms-auto mb-2 mb-lg-0">
@@ -13,7 +13,7 @@ const Header = () => {
             <Link
               className="nav-link"
               style={{ fontWeight: "600", color: "white" }}
-              to="/"
+              to="/home"
             >
               Home
             </Link>
@@ -25,6 +25,15 @@ const Header = () => {
               to="/transaction"
             >
               Make Transaction
+            </Link>
+          </li>
+          <li className="nav-item">
+            <Link
+              className="nav-link"
+              style={{ fontWeight: "600", color: "white" }}
+              to="/"
+            >
+              Logout
             </Link>
           </li>
         </ul>

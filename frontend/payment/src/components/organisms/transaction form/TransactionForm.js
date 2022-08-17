@@ -7,10 +7,7 @@ import DropDown from "../DropDown/DropDown";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import "./TransactionFrom.css";
-import API from "../../../services/API";
 import { useNavigate } from "react-router-dom";
-//import Modal from "../../atom/alert/Modal";
-
 const TransactionForm = () => {
   const [customerId, setCustomerId] = useState();
   const [customer, setCustomer] = useState(null);
@@ -30,12 +27,6 @@ const TransactionForm = () => {
   const [error, setError] = useState(false);
   const [buttonDisbale, setButtonDisable] = useState(false);
   const navigate = useNavigate();
-  useEffect(()=>{
-    function disableSubmit()
-    {
-      console.log(transferDate);
-    }
-  },[transferDate])
   useEffect(() => {
     async function getCustomer() {
       await getList(`/customer/${customerId}`)

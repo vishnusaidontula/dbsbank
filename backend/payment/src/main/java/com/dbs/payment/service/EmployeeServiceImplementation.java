@@ -34,8 +34,7 @@ public class EmployeeServiceImplementation implements EmployeeService {
         {
         	throw new EmployeeNotFoundException("Invalid Employee Id "+id);
         }
-        EmployeeDTO employeeDTO= modelMapper.map(employee.get(), EmployeeDTO.class);
-        return employeeDTO;
+        return modelMapper.map(employee.get(), EmployeeDTO.class);
 	}
 
 	@Override
@@ -51,6 +50,16 @@ public class EmployeeServiceImplementation implements EmployeeService {
 		Employee employee=modelMapper.map(employeeDTO, Employee.class);
 		employeeRepository.delete(employee);
 		return "sucessfully deleted employee with id - "+id;
+	}
+
+	@Override
+	public EmployeeDTO getEmployeeByNameAndPassword(String name, String password) throws EmployeeNotFoundException {
+		Optional<Employee> employee = this.employeeRepository.findByEmployeeNameAndPassword(name,password);
+        if(employee.isEmpty())
+        {
+        	throw new EmployeeNotFoundException("Invalid Employee Details");
+        }
+        return modelMapper.map(employee.get(), EmployeeDTO.class);
 	}
 
 }
