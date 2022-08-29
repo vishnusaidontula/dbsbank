@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import "./Card.css"
-import asset from "../../../asset/images/background.png";
+import asset from "../asset/images/background.png";
 
 
 const Card=(props)=>{

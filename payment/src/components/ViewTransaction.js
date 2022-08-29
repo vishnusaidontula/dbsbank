@@ -1,7 +1,7 @@
 /* eslint-disable no-undef */
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import getList from "../../../services/getList";
+import getList from "../services/getList";
 const ViewTransaction = () => {
   const [transactionDetails, setTransactionDetails] = useState({});
   const params = useParams();

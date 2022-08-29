@@ -1,5 +1,5 @@
 import React from 'react'
-import Card from '../components/molecules/card/Card'
+import Card from '../components/Card'
 import Template from '../templates/Template'
 import message from '../utils/message'
 

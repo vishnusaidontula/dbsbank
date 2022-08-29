@@ -1,5 +1,5 @@
 import React from 'react'
-import ViewTransaction from '../components/organisms/view transaction/ViewTransaction'
+import ViewTransaction from '../components/ViewTransaction'
 import Template from '../templates/Template'
 
 const TransactionDetails = () => {

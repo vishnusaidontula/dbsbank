@@ -1,5 +1,5 @@
 import React from "react";
-import Header from "../components/organisms/header/Header";
+import Header from "../components/Header";
 const Template = (props) => {
   return (
     <div>

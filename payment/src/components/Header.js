@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import logo from "../../../asset/logo/digi.png";
+import logo from "../asset/logo/digi.png";
+import "./Header.css";
 const Header = () => {
   return (
     <nav className="navbar navbar-expand-lg navbar-dark bg-dark" >

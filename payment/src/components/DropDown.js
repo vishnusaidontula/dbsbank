@@ -1,6 +1,6 @@
 import React,{useState,useEffect} from 'react'
 import Select from 'react-select'
-import getList from '../../../services/getList';
+import getList from '../services/getList';
 const DropDown = (props) => {
     const [filterValues,setFilterValues] = useState([]);
     useEffect(() => {

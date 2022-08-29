@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
-import getList from "../../../services/getList";
-import postElement from "../../../services/postElement";
-import Button from "../../atom/button/Button";
-import Input from "../../atom/input/Input";
-import DropDown from "../DropDown/DropDown";
+import getList from "../services/getList";
+import postElement from "../services/postElement";
+import Button from ".//Button";
+import Input from ".//Input";
+import DropDown from ".//DropDown";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import "./TransactionFrom.css";

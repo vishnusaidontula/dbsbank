@@ -1,5 +1,5 @@
 import React from 'react'
-import LoggerTable from '../components/organisms/logger table/LoggerTable'
+import LoggerTable from '../components/LoggerTable'
 import Template from '../templates/Template'
 
 const LoggerPage = () => {

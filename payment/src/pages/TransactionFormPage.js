@@ -1,5 +1,5 @@
 import React from 'react'
-import TransactionForm from '../components/organisms/transaction form/TransactionForm'
+import TransactionForm from '../components/TransactionForm'
 import Template from '../templates/Template'
 const TransactionFormPage = () => {
     return (

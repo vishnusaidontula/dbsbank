@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import getList from "../../../services/getList";
-import Pagination from "../../molecules/pagination/Pagination";
+import getList from "../services/getList";
+import Pagination from ".//Pagination";
 import "./LoggerTable.css";
 const LoggerTable = () => {
   const [logDetails, setLogDetails] = useState([]);
