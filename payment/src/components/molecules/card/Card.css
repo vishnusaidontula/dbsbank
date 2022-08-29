@@ -1,0 +1,29 @@
+.box{
+    display: grid;
+    margin: auto;
+    grid-template-columns: repeat(3,1fr);
+    padding: 3rem;
+    width: 70%;
+}
+.h-100{
+    text-align: center;
+}
+.card-img-top{
+    width: 60%;
+    margin: auto;
+    padding: 1rem;
+}
+.col{
+    padding: 1rem;
+}
+
+
+.col:hover{
+    transition: 0.5s;
+    transform: scale(1.1);
+}
+.link{
+    text-decoration: none;
+    color: black;
+    font-size: 20rem;
+}
