@@ -7,3 +7,4 @@ import com.dbs.payment.model.Bank;
 public interface BankRepository extends JpaRepository<Bank, String> {
 
 }
+ 
